@@ -1,6 +1,8 @@
 import express from "express"
 import cors from "cors"
-import authRoute from "./routes/auth.route.js"
+import authRoutes from "./routes/auth.route.js"
+import userRoutes from "./routes/auth.route.js"
+import chatRoutes from "./routes/chat.route.js"
 import cookieparser from "cookie-parser"
 import dotenv from "dotenv"
 import {dbconnection} from "./lib/db.js"
@@ -18,8 +20,11 @@ app.use(
 
 app.use(express.json())
 app.use(cookieparser())
-app.use("/api/auth", authRoute)
 
+// Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/chat", chatRoutes);
 
 app.listen(PORT, () => {
     console.log("server running on port 5000")
